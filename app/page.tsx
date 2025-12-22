@@ -2,55 +2,56 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center text-center px-6 py-24 bg-gray-100">
-        <h1 className="text-4xl md:text-5xl font-bold">
-          Fenfen's Barber Shop
+    <main>
+      <section className="rounded-3xl border bg-white p-10 md:p-14 shadow-sm">
+        <p className="text-sm text-gray-600">Boston • Walk-ins + Appointments</p>
+
+        <h1 className="mt-3 text-4xl md:text-5xl font-bold tracking-tight">
+          Fenfen’s Barbershop
         </h1>
-        <p className="mt-4 max-w-xl text-lg text-gray-600">
-          Book your cut online, check barber availability, and see live wait
-          times — all in one place.
+
+        <p className="mt-4 max-w-2xl text-gray-600 text-lg">
+          Book your cut online, check barber availability, and see live wait times
+          before you pull up.
         </p>
 
-        <div className="mt-6 flex gap-4">
-          <Link
-            href="/barbers"
-            className="rounded-xl border border-black px-6 py-3 hover:bg-black hover:text-white"
-          >
-            View Barbers
-          </Link>
+        <div className="mt-7 flex flex-col sm:flex-row gap-3">
           <Link
             href="/book"
-            className="rounded-xl border border-black px-6 py-3 hover:bg-black hover:text-white"
+            className="rounded-xl bg-black text-white px-6 py-3 text-center hover:opacity-90"
           >
-            Book Now
+            Book an appointment
+          </Link>
+
+          <Link
+            href="/barbers"
+            className="rounded-xl border border-black px-6 py-3 text-center hover:bg-black hover:text-white transition"
+          >
+            View barbers
           </Link>
         </div>
-      </section>
 
-      {/* Info Section */}
-      <section className="max-w-5xl mx-auto px-6 py-16 grid gap-10 md:grid-cols-3 text-center">
-        <div>
-          <h3 className="text-xl font-semibold">Skilled Barbers</h3>
-          <p className="mt-2 text-gray-600">
-            Choose from experienced barbers specializing in fades, tapers, and
-            beard work.
-          </p>
-        </div>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border bg-gray-50 p-5">
+            <h3 className="font-semibold">Availability</h3>
+            <p className="mt-2 text-sm text-gray-600">
+              See who’s free right now and who’s next.
+            </p>
+          </div>
 
-        <div>
-          <h3 className="text-xl font-semibold">Easy Booking</h3>
-          <p className="mt-2 text-gray-600">
-            Pick a barber, select a time, and book instantly online.
-          </p>
-        </div>
+          <div className="rounded-2xl border bg-gray-50 p-5">
+            <h3 className="font-semibold">Walk-ins</h3>
+            <p className="mt-2 text-sm text-gray-600">
+              Live wait time updates so you don’t waste time.
+            </p>
+          </div>
 
-        <div>
-          <h3 className="text-xl font-semibold">Live Wait Times</h3>
-          <p className="mt-2 text-gray-600">
-            Check current wait times and walk-in availability before you arrive.
-          </p>
+          <div className="rounded-2xl border bg-gray-50 p-5">
+            <h3 className="font-semibold">Easy Booking</h3>
+            <p className="mt-2 text-sm text-gray-600">
+              Pick a barber, service, and time in seconds.
+            </p>
+          </div>
         </div>
       </section>
     </main>
