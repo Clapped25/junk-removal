@@ -9,7 +9,7 @@ export default function Home() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=2400&q=80')",
+              "url('https://static.wixstatic.com/media/ec2552_53b4cbefc787422a8588cc3966469dd4~mv2.jpg/v1/fill/w_640,h_740,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ec2552_53b4cbefc787422a8588cc3966469dd4~mv2.jpg')",
           }}
         />
         <div className="absolute inset-0 bg-black/75" />
