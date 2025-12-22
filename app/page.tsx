@@ -9,7 +9,7 @@ export default function Home() {
           className="absolute inset-0 bg-cover bg-center scale-105"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=2400&q=80')",
+              "url('https://dartsbarbershop.com/wp-content/uploads/2025/10/Darts-Barbershop-1-8-scaled.jpg')",
             filter: "contrast(1.15) saturate(1.2)",
           }}
         />
