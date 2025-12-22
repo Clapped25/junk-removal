@@ -6,13 +6,17 @@ export default function Home() {
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center text-center">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center scale-105"
           style={{
             backgroundImage:
-              "url('https://static.wixstatic.com/media/ec2552_53b4cbefc787422a8588cc3966469dd4~mv2.jpg/v1/fill/w_640,h_740,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ec2552_53b4cbefc787422a8588cc3966469dd4~mv2.jpg')",
+              "url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=2400&q=80')",
+            filter: "contrast(1.15) saturate(1.2)",
           }}
         />
-        <div className="absolute inset-0 bg-black/75" />
+
+        {/* Gradient overlay instead of flat black */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/90" />
+
 
         <div className="relative z-10 max-w-3xl px-6 pt-20">
           <p className="tracking-widest text-[#d4af37] text-sm mb-4">
