@@ -1,0 +1,279 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #f6f7fb;
+  color: #111;
+}
+
+.top-bar {
+  background: #072f6b;
+  color: white;
+  padding: 12px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-bar a {
+  color: #ffc400;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navbar {
+  background: white;
+  padding: 20px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 900;
+  color: #075bd8;
+}
+
+nav a {
+  text-decoration: none;
+  color: #111;
+  margin: 0 12px;
+  font-weight: 600;
+}
+
+.sign-btn {
+  background: #ffc400;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hero {
+  min-height: 85vh;
+  background: linear-gradient(to right, #075bd8, #073b8c);
+  color: white;
+  padding: 80px 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.hero-content {
+  max-width: 650px;
+}
+
+.mini-text {
+  color: #ffc400;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.hero h1 {
+  font-size: 58px;
+  line-height: 1.05;
+  margin-bottom: 22px;
+}
+
+.hero-p {
+  font-size: 19px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.hero-buttons {
+  margin-bottom: 20px;
+}
+
+.yellow-btn,
+.white-btn {
+  display: inline-block;
+  padding: 15px 24px;
+  border-radius: 7px;
+  text-decoration: none;
+  font-weight: 900;
+  margin-right: 12px;
+}
+
+.yellow-btn {
+  background: #ffc400;
+  color: #111;
+}
+
+.white-btn {
+  background: white;
+  color: #075bd8;
+}
+
+.trust {
+  font-size: 15px;
+  opacity: 0.95;
+}
+
+.booking-card {
+  background: white;
+  color: #111;
+  padding: 30px;
+  width: 360px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.booking-card h2 {
+  margin-bottom: 18px;
+}
+
+.booking-card input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 2px solid #ddd;
+  border-radius: 7px;
+}
+
+.booking-card button {
+  width: 100%;
+  padding: 15px;
+  background: #ffc400;
+  border: none;
+  border-radius: 7px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.booking-card p {
+  margin-top: 12px;
+  color: #555;
+  font-size: 14px;
+}
+
+.intro,
+.cities,
+.services,
+.pricing,
+.business,
+.sustainability,
+.contact {
+  padding: 70px 8%;
+  text-align: center;
+}
+
+.intro,
+.services,
+.business,
+.contact {
+  background: white;
+}
+
+.intro h2,
+.cities h2,
+.services h2,
+.pricing h2,
+.business h2,
+.sustainability h2,
+.contact h2 {
+  font-size: 38px;
+  margin-bottom: 18px;
+}
+
+.intro p,
+.pricing p,
+.business p,
+.sustainability p,
+.contact p {
+  max-width: 850px;
+  margin: 0 auto 25px;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.city-grid,
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.city-grid span,
+.service-card {
+  background: #eef4ff;
+  padding: 22px;
+  border-radius: 10px;
+  font-weight: 800;
+}
+
+.pricing {
+  background: #072f6b;
+  color: white;
+}
+
+.contact h3 {
+  font-size: 32px;
+  color: #075bd8;
+  margin-bottom: 25px;
+}
+
+footer {
+  background: #111827;
+  color: white;
+  padding: 50px 8%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+footer h3,
+footer h4 {
+  margin-bottom: 15px;
+}
+
+footer p {
+  color: #d1d5db;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 950px) {
+  .navbar,
+  .top-bar {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .booking-card {
+    width: 100%;
+  }
+
+  .city-grid,
+  .service-grid,
+  footer {
+    grid-template-columns: 1fr;
+  }
+}
