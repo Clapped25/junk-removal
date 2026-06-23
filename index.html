@@ -3,153 +3,1264 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Malden Junk Removal</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Malden Junk Removal – Same-Day Service</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0f1b2d;
+      --navy2:  #1a2d47;
+      --accent: #f5c518;
+      --accent2:#e6b800;
+      --green:  #22c55e;
+      --white:  #ffffff;
+      --gray:   #f7f8fa;
+      --text:   #1e293b;
+      --muted:  #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── TOP BAR ─────────────────────────────────────────── */
+    .top-bar {
+      background: var(--navy);
+      color: #94a3b8;
+      font-size: 13px;
+      padding: 8px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-bar strong { color: var(--accent); }
+    .top-bar a {
+      background: var(--accent);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 12px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      letter-spacing: .04em;
+      transition: background .2s;
+    }
+    .top-bar a:hover { background: var(--accent2); }
+
+    /* ─── NAVBAR ──────────────────────────────────────────── */
+    .navbar {
+      background: var(--navy2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 64px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -.02em;
+    }
+    .logo span { color: var(--accent); }
+    nav { display: flex; gap: 4px; }
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: color .2s, background .2s;
+    }
+    nav a:hover { color: var(--white); background: rgba(255,255,255,.07); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: var(--navy) !important;
+      font-weight: 700 !important;
+      padding: 9px 18px !important;
+    }
+    .nav-cta:hover { background: var(--accent2) !important; }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1e3557 55%, #0f2744 100%);
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding: 60px 32px;
+      gap: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero-content { flex: 1; max-width: 580px; }
+    .mini-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245,197,24,.15);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(245,197,24,.3);
+      margin-bottom: 20px;
+    }
+    .mini-tag::before { content: '⚡'; }
+
+    .hero h1 {
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-p {
+      color: #94a3b8;
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .btn-yellow {
+      background: var(--accent);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+      display: inline-block;
+    }
+    .btn-yellow:hover { background: var(--accent2); transform: translateY(-1px); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,.25);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: border-color .2s, background .2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.07); }
+
+    .trust-badges {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #94a3b8;
+      font-size: 13px;
+    }
+    .trust-badge .check {
+      width: 18px; height: 18px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    /* ─── BOOKING CARD ────────────────────────────────────── */
+    .booking-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 36px 32px;
+      width: 360px;
+      flex-shrink: 0;
+      box-shadow: 0 24px 64px rgba(0,0,0,.35);
+      position: relative;
+      z-index: 1;
+    }
+    .booking-card h2 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+    .booking-card .sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .booking-card label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .booking-card input,
+    .booking-card select,
+    .booking-card textarea {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--white);
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .booking-card input:focus,
+    .booking-card select:focus,
+    .booking-card textarea:focus { border-color: var(--accent); }
+    .booking-card textarea { resize: none; height: 72px; }
+    .booking-card button {
+      width: 100%;
+      background: var(--accent);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 15px;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .booking-card button:hover { background: var(--accent2); transform: translateY(-1px); }
+    .booking-card .card-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 12px;
+    }
+    .booking-card .card-note span { color: var(--green); font-weight: 700; }
+
+    /* ─── STATS BAR ───────────────────────────────────────── */
+    .stats-bar {
+      background: var(--accent);
+      padding: 22px 32px;
+      display: flex;
+      justify-content: center;
+      gap: 56px;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #5a4a00;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    /* ─── HOW IT WORKS ────────────────────────────────────── */
+    .how {
+      padding: 80px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--accent2);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 900;
+      letter-spacing: -.025em;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 540px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+
+    .steps { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; }
+    .step {
+      flex: 1;
+      min-width: 200px;
+      max-width: 240px;
+      text-align: center;
+    }
+    .step-icon {
+      width: 64px; height: 64px;
+      background: var(--navy);
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      margin: 0 auto 16px;
+    }
+    .step h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .step p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .step-connector {
+      flex-shrink: 0;
+      align-self: flex-start;
+      margin-top: 34px;
+      color: var(--accent);
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    /* ─── SERVICES ────────────────────────────────────────── */
+    .services-section {
+      background: var(--gray);
+      padding: 80px 32px;
+    }
+    .services-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 0;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 16px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--navy);
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+      cursor: default;
+    }
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    }
+    .service-card .svc-icon { font-size: 28px; display: block; margin-bottom: 10px; }
+
+    /* ─── PRICING ─────────────────────────────────────────── */
+    .pricing-section {
+      padding: 80px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .pricing-intro { text-align: center; }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .pricing-card {
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      position: relative;
+      transition: box-shadow .2s;
+    }
+    .pricing-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,.08); }
+    .pricing-card.featured {
+      border-color: var(--accent);
+      background: #fffbea;
+    }
+    .pricing-card.featured .featured-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+    .pricing-card h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .pricing-card .price {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -.03em;
+    }
+    .pricing-card .price span {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
+    .pricing-card .price-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .pricing-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pricing-card ul li {
+      font-size: 14px;
+      color: var(--text);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .pricing-card ul li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    /* ─── WHAT WE TAKE ────────────────────────────────────── */
+    .take-section {
+      background: var(--gray);
+      padding: 80px 32px;
+    }
+    .take-inner { max-width: 1100px; margin: 0 auto; }
+
+    .take-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 48px;
+    }
+    .take-col h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .take-col h3 .badge-yes {
+      background: var(--green);
+      color: white;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .take-col h3 .badge-no {
+      background: #ef4444;
+      color: white;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .take-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .take-list li {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--white);
+      border-radius: 8px;
+    }
+    .yes-icon { color: var(--green); font-size: 15px; }
+    .no-icon  { color: #ef4444; font-size: 15px; }
+
+    /* ─── REVIEWS ─────────────────────────────────────────── */
+    .reviews-section {
+      padding: 80px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .review-card {
+      background: var(--gray);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: left;
+    }
+    .stars { color: var(--accent); font-size: 16px; margin-bottom: 10px; letter-spacing: 1px; }
+    .review-text {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .reviewer-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .reviewer-name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .reviewer-loc  { font-size: 12px; color: var(--muted); }
+
+    /* ─── SUSTAINABILITY ──────────────────────────────────── */
+    .sustain-section {
+      background: var(--navy);
+      padding: 64px 32px;
+      text-align: center;
+    }
+    .sustain-section h2 {
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -.025em;
+      margin-bottom: 14px;
+    }
+    .sustain-section p {
+      color: #94a3b8;
+      font-size: 16px;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .sustain-icons {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+    .sustain-item { text-align: center; }
+    .sustain-item .s-icon {
+      font-size: 36px;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .sustain-item p {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ─── CTA STRIP ───────────────────────────────────────── */
+    .cta-strip {
+      background: linear-gradient(90deg, #f5c518 0%, #ffd740 100%);
+      padding: 56px 32px;
+      text-align: center;
+    }
+    .cta-strip h2 {
+      font-size: clamp(24px, 3.5vw, 40px);
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -.025em;
+      margin-bottom: 10px;
+    }
+    .cta-strip p {
+      font-size: 16px;
+      color: #5a4a00;
+      margin-bottom: 28px;
+    }
+    .cta-phone {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--navy);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 20px;
+      letter-spacing: -.02em;
+    }
+    .cta-strip-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-navy {
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .btn-navy:hover { background: var(--navy2); }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      color: #94a3b8;
+      padding: 56px 32px 28px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    footer h3 {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    footer h3 span { color: var(--accent); }
+    footer .tagline { font-size: 14px; line-height: 1.6; }
+    footer h4 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+    footer ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    footer ul li a, footer ul li {
+      font-size: 14px;
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color .2s;
+    }
+    footer ul li a:hover { color: var(--accent); }
+    footer .footer-phone {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-top: 8px;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p { font-size: 12px; color: #475569; }
+
+    /* ─── SLIDE-IN QUOTE POPUP ────────────────────────────── */
+    .quote-popup {
+      position: fixed;
+      bottom: 32px;
+      right: -440px;
+      width: 400px;
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: 0 24px 64px rgba(0,0,0,.22), 0 0 0 1px rgba(0,0,0,.06);
+      z-index: 9999;
+      transition: right .55s cubic-bezier(.34,1.3,.64,1);
+      overflow: hidden;
+    }
+    .quote-popup.open { right: 32px; }
+    .quote-popup.dismissed {
+      right: -440px;
+      transition: right .4s ease-in;
+    }
+
+    .qp-header {
+      background: var(--navy);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .qp-header-left { display: flex; align-items: center; gap: 10px; }
+    .qp-badge {
+      background: var(--accent);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .qp-header h3 { color: var(--white); font-size: 15px; font-weight: 700; }
+    .qp-close {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 2px;
+      transition: color .2s;
+    }
+    .qp-close:hover { color: var(--white); }
+
+    .qp-body { padding: 20px; }
+    .qp-body p { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+
+    .qp-form label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .qp-form input,
+    .qp-form select {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+      margin-bottom: 12px;
+      transition: border-color .2s;
+    }
+    .qp-form input:focus,
+    .qp-form select:focus { border-color: var(--accent); }
+    .qp-form button {
+      width: 100%;
+      background: var(--accent);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .qp-form button:hover { background: var(--accent2); }
+    .qp-note {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .qp-success {
+      display: none;
+      text-align: center;
+      padding: 8px 0 4px;
+    }
+    .qp-success .success-icon { font-size: 40px; margin-bottom: 8px; }
+    .qp-success h4 { font-size: 17px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .qp-success p { font-size: 13px; color: var(--muted); }
+
+    /* ─── STICKY BOTTOM CTA (mobile) ─────────────────────── */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--accent);
+      color: var(--navy);
+      text-align: center;
+      padding: 14px;
+      font-weight: 800;
+      font-size: 15px;
+      z-index: 200;
+      text-decoration: none;
+      box-shadow: 0 -4px 20px rgba(0,0,0,.15);
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero { flex-direction: column; padding: 40px 20px; min-height: auto; }
+      .booking-card { width: 100%; }
+      .take-cols { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      nav { display: none; }
+      .quote-popup { width: calc(100vw - 24px); bottom: 16px; right: -100vw; }
+      .quote-popup.open { right: 12px; }
+      .sticky-cta { display: block; }
+    }
+    @media (max-width: 480px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .stats-bar { gap: 28px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .quote-popup { transition: none; }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- TOP BAR -->
   <div class="top-bar">
     <p>24/7 Customer Service: <strong>617-000-0000</strong></p>
     <a href="#booking">CHECK AVAILABILITY</a>
   </div>
 
+  <!-- NAVBAR -->
   <header class="navbar">
-    <div class="logo">Malden Junk Removal</div>
-
+    <div class="logo">Malden <span>Junk</span> Removal</div>
     <nav>
       <a href="#home">Home</a>
-      <a href="#services">For Home</a>
-      <a href="#business">For Business</a>
+      <a href="#services">Services</a>
       <a href="#pricing">Pricing</a>
       <a href="#what-we-take">What We Take</a>
-      <a href="#contact">Contact</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact" class="nav-cta">Get a Quote</a>
     </nav>
-
-    <button class="sign-btn">Sign In</button>
+    <div></div>
   </header>
 
+  <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero-content">
-      <p class="mini-text">Fast • Local • Same-Day Service</p>
-      <h1>Same-Day Junk Removal in Malden & Greater Boston</h1>
+      <div class="mini-tag">Fast • Local • Same-Day Service</div>
+      <h1>Same-Day Junk Removal.<br /><em>You Point, We Haul.</em></h1>
       <p class="hero-p">
-        We remove furniture, appliances, mattresses, yard waste, garage junk,
-        and more. You point, we load, haul, and clean up.
+        We remove furniture, appliances, mattresses, yard waste, garage cleanouts, and more — fast, affordable, and with zero hassle. Serving Greater Boston.
       </p>
-
       <div class="hero-buttons">
-        <a href="#booking" class="yellow-btn">Check Availability</a>
-        <a href="#contact" class="white-btn">Get Free Estimate</a>
+        <a href="#booking" class="btn-yellow">📅 Check Availability</a>
+        <a href="#contact" class="btn-outline">Get a Free Estimate →</a>
       </div>
-
-      <p class="trust">No credit card required • Free quote • Friendly local team</p>
+      <div class="trust-badges">
+        <div class="trust-badge"><span class="check">✓</span>No credit card required</div>
+        <div class="trust-badge"><span class="check">✓</span>Free upfront quote</div>
+        <div class="trust-badge"><span class="check">✓</span>Friendly local team</div>
+      </div>
     </div>
 
+    <!-- BOOKING CARD -->
     <div class="booking-card" id="booking">
       <h2>Book a Pickup</h2>
-      <input type="text" placeholder="Enter ZIP code" />
-      <input type="text" placeholder="What do you need removed?" />
+      <p class="sub">Free quote — no payment needed today.</p>
+
+      <label>Your Name</label>
+      <input type="text" placeholder="e.g. John Smith" />
+
+      <label>Phone Number</label>
+      <input type="tel" placeholder="617-000-0000" />
+
+      <label>What needs to go?</label>
+      <select>
+        <option value="">Select item type…</option>
+        <option>Furniture (sofa, bed, chairs)</option>
+        <option>Mattress / Box Spring</option>
+        <option>Appliances</option>
+        <option>TVs & Electronics</option>
+        <option>Garage Cleanout</option>
+        <option>Yard Waste</option>
+        <option>Construction Debris</option>
+        <option>General Junk / Mixed Items</option>
+        <option>Other</option>
+      </select>
+
+      <label>Preferred Date</label>
       <input type="date" />
-      <button>Check Availability</button>
-      <p>No payment needed to request a quote.</p>
+
+      <label>Any details? (optional)</label>
+      <textarea placeholder="How much junk? Any access issues?"></textarea>
+
+      <button onclick="handleBooking(this)">Check Availability →</button>
+      <p class="card-note"><span>✓</span> No payment until we give you a quote you approve</p>
     </div>
   </section>
 
-  <section class="intro">
-    <h2>Simple Junk Pick Up Service</h2>
-    <p>
-      We are a local junk removal team serving Malden, Medford, Everett,
-      Revere, Chelsea, Somerville, Cambridge, and nearby Greater Boston areas.
-      Our goal is to make junk removal easy, fast, and affordable.
-    </p>
-  </section>
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Jobs Completed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5★</div>
+      <div class="stat-label">Average Rating</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">Same Day</div>
+      <div class="stat-label">Availability</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">Free</div>
+      <div class="stat-label">Upfront Quotes</div>
+    </div>
+  </div>
 
-  <section class="cities">
-    <h2>Cities We Service</h2>
-    <div class="city-grid">
-      <span>Malden</span>
-      <span>Medford</span>
-      <span>Everett</span>
-      <span>Revere</span>
-      <span>Chelsea</span>
-      <span>Somerville</span>
-      <span>Cambridge</span>
-      <span>Boston</span>
-      <span>Melrose</span>
-      <span>Stoneham</span>
+  <!-- HOW IT WORKS -->
+  <section class="how" id="services">
+    <div class="section-eyebrow">How It Works</div>
+    <h2 class="section-title">Junk Gone in 3 Simple Steps</h2>
+    <p class="section-sub">No surprises, no hidden fees. We show up, you approve the price, we haul everything away.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-icon">📞</div>
+        <h3>1. Book Online or Call</h3>
+        <p>Fill out the form or call us. We'll confirm your time window — often same day.</p>
+      </div>
+      <div class="step-connector">→</div>
+      <div class="step">
+        <div class="step-icon">💰</div>
+        <h3>2. Get Your Free Quote</h3>
+        <p>We give you an upfront price before we start. No surprises, no pressure.</p>
+      </div>
+      <div class="step-connector">→</div>
+      <div class="step">
+        <div class="step-icon">🚛</div>
+        <h3>3. We Haul & Clean Up</h3>
+        <p>Our crew loads everything up and sweeps the area. You're done.</p>
+      </div>
     </div>
   </section>
 
-  <section class="services" id="what-we-take">
-    <h2>What We Take</h2>
-    <p>We take almost anything non-hazardous that our crew can safely lift.</p>
-
-    <div class="service-grid">
-      <div class="service-card">Furniture Removal</div>
-      <div class="service-card">Mattress Removal</div>
-      <div class="service-card">Appliances</div>
-      <div class="service-card">TVs & Electronics</div>
-      <div class="service-card">Yard Waste</div>
-      <div class="service-card">Garage Cleanouts</div>
-      <div class="service-card">Construction Debris</div>
-      <div class="service-card">Office Junk</div>
+  <!-- SERVICES -->
+  <section class="services-section" id="what-we-take">
+    <div class="services-inner">
+      <div class="section-eyebrow">Services</div>
+      <h2 class="section-title">We Take Almost Anything</h2>
+      <p class="section-sub" style="margin-bottom:40px;">Non-hazardous items our crew can safely lift — no job too big or too small.</p>
+      <div class="service-grid">
+        <div class="service-card"><span class="svc-icon">🛋️</span>Furniture Removal</div>
+        <div class="service-card"><span class="svc-icon">🛏️</span>Mattress Removal</div>
+        <div class="service-card"><span class="svc-icon">🫙</span>Appliances</div>
+        <div class="service-card"><span class="svc-icon">📺</span>TVs & Electronics</div>
+        <div class="service-card"><span class="svc-icon">🌿</span>Yard Waste</div>
+        <div class="service-card"><span class="svc-icon">🏚️</span>Garage Cleanouts</div>
+        <div class="service-card"><span class="svc-icon">🧱</span>Construction Debris</div>
+        <div class="service-card"><span class="svc-icon">🗂️</span>Office Junk</div>
+        <div class="service-card"><span class="svc-icon">🏠</span>Estate Cleanouts</div>
+        <div class="service-card"><span class="svc-icon">📦</span>Moving Junk</div>
+        <div class="service-card"><span class="svc-icon">🚿</span>Hot Tub Removal</div>
+        <div class="service-card"><span class="svc-icon">🏋️</span>Exercise Equipment</div>
+      </div>
     </div>
   </section>
 
-  <section class="pricing" id="pricing">
-    <div>
-      <h2>Upfront Pricing</h2>
-      <p>
-        Before we give an exact price, we look at the amount of junk you have.
-        We offer free, no-obligation estimates, so you know the price before we start.
-      </p>
-      <a href="#booking" class="yellow-btn">Get Free Estimate</a>
+  <!-- WHAT WE DO & DON'T TAKE -->
+  <section class="take-section">
+    <div class="take-inner">
+      <div style="text-align:center;">
+        <div class="section-eyebrow">Item Guide</div>
+        <h2 class="section-title">What We Will & Won't Take</h2>
+        <p class="section-sub">We keep it simple. If it's non-hazardous and liftable, we'll take it. Not sure? Just call and we'll let you know.</p>
+      </div>
+      <div class="take-cols">
+        <div class="take-col">
+          <h3>We'll Take It <span class="badge-yes">YES</span></h3>
+          <ul class="take-list">
+            <li><span class="yes-icon">✓</span>Sofas, chairs, bed frames, dressers</li>
+            <li><span class="yes-icon">✓</span>Mattresses and box springs</li>
+            <li><span class="yes-icon">✓</span>Washers, dryers, refrigerators</li>
+            <li><span class="yes-icon">✓</span>TVs, computers, monitors</li>
+            <li><span class="yes-icon">✓</span>Lawn mowers, outdoor furniture</li>
+            <li><span class="yes-icon">✓</span>Wood, drywall, concrete (small amounts)</li>
+            <li><span class="yes-icon">✓</span>Boxes, bags, general clutter</li>
+            <li><span class="yes-icon">✓</span>Hot tubs and exercise equipment</li>
+          </ul>
+        </div>
+        <div class="take-col">
+          <h3>We Can't Take <span class="badge-no">NO</span></h3>
+          <ul class="take-list">
+            <li><span class="no-icon">✗</span>Hazardous chemicals or paint</li>
+            <li><span class="no-icon">✗</span>Gasoline, motor oil, propane tanks</li>
+            <li><span class="no-icon">✗</span>Asbestos or lead-containing materials</li>
+            <li><span class="no-icon">✗</span>Medical / biohazard waste</li>
+            <li><span class="no-icon">✗</span>Car batteries (call for options)</li>
+            <li><span class="no-icon">✗</span>Anything illegal to dispose of</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="business" id="business">
-    <h2>For Homes & Businesses</h2>
-    <p>
-      Whether you are cleaning your home, apartment, garage, office, or small
-      business, our team can help remove unwanted junk quickly and safely.
-    </p>
+  <!-- PRICING -->
+  <section class="pricing-section" id="pricing">
+    <div class="pricing-intro">
+      <div class="section-eyebrow">Pricing</div>
+      <h2 class="section-title">Honest, Upfront Pricing</h2>
+      <p class="section-sub">We price by how much space your junk takes in our truck. No hidden fees — ever. Your quote is locked in before we lift a thing.</p>
+    </div>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <h3>Single Item</h3>
+        <div class="price">$75<span>+</span></div>
+        <p class="price-note">Starting at — final price based on item</p>
+        <ul>
+          <li>1–2 items (sofa, mattress, etc.)</li>
+          <li>Quick in-and-out pickup</li>
+          <li>Same-day available</li>
+          <li>Free quote before we start</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <div class="featured-badge">MOST POPULAR</div>
+        <h3>Half Truckload</h3>
+        <div class="price">$199<span>+</span></div>
+        <p class="price-note">Great for a room cleanout or garage</p>
+        <ul>
+          <li>Fill roughly half a truck</li>
+          <li>Mixed items OK</li>
+          <li>Includes labor & haul-away</li>
+          <li>Same-day available</li>
+          <li>Free quote before we start</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Full Truckload</h3>
+        <div class="price">$349<span>+</span></div>
+        <p class="price-note">Full home or office cleanout</p>
+        <ul>
+          <li>Maximum truck capacity</li>
+          <li>Whole-home or estate jobs</li>
+          <li>Priority scheduling available</li>
+          <li>Free quote before we start</li>
+        </ul>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:28px;font-size:14px;color:var(--muted);">Prices may vary based on item type, weight, and disposal fees. We always confirm before we start.</p>
   </section>
 
-  <section class="sustainability">
-    <h2>Donate. Recycle. Remove Responsibly.</h2>
-    <p>
-      We try to donate or recycle items whenever possible instead of sending
-      everything straight to the dump.
-    </p>
+  <!-- REVIEWS -->
+  <section class="reviews-section" id="reviews">
+    <div class="section-eyebrow">Reviews</div>
+    <h2 class="section-title">What Our Customers Say</h2>
+    <p class="section-sub">Real people, real results. We take pride in showing up on time and getting the job done right.</p>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Called at 9am and they were at my house by noon. Removed a sectional sofa, a broken treadmill, and a pile of junk from my garage. Very professional and the price was fair."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">MR</div>
+          <div>
+            <div class="reviewer-name">Mike R.</div>
+            <div class="reviewer-loc">Malden, MA</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"These guys are the real deal. I had a full basement to clean out after my mom passed — they were respectful, quick, and reasonably priced. Highly recommend."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">SL</div>
+          <div>
+            <div class="reviewer-name">Sandra L.</div>
+            <div class="reviewer-loc">Everett, MA</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Used them twice now for apartment moveouts. Super easy to book, they give you a real price upfront, and the crew is friendly. Won't use anyone else."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">TN</div>
+          <div>
+            <div class="reviewer-name">Tony N.</div>
+            <div class="reviewer-loc">Somerville, MA</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="contact" id="contact">
-    <h2>Ready to Remove Your Junk?</h2>
-    <p>Call us today or request a pickup online.</p>
-    <h3>617-000-0000</h3>
-    <a href="#booking" class="yellow-btn">Check Availability</a>
+  <!-- SUSTAINABILITY -->
+  <section class="sustain-section">
+    <h2>We Don't Just Dump It.</h2>
+    <p>Before anything goes to a landfill, we do our best to donate usable items and recycle what we can. Less waste, better community.</p>
+    <div class="sustain-icons">
+      <div class="sustain-item"><span class="s-icon">♻️</span><p>Recycle First</p></div>
+      <div class="sustain-item"><span class="s-icon">🤝</span><p>Donate When Possible</p></div>
+      <div class="sustain-item"><span class="s-icon">🌱</span><p>Responsible Disposal</p></div>
+    </div>
   </section>
 
+  <!-- CTA / CONTACT -->
+  <section class="cta-strip" id="contact">
+    <h2>Ready to Clear the Clutter?</h2>
+    <p>Same-day availability. Free quotes. No credit card needed to get started.</p>
+    <a href="tel:6170000000" class="cta-phone">📞 617-000-0000</a>
+    <div class="cta-strip-btns">
+      <a href="#booking" class="btn-navy">Book a Pickup</a>
+      <a href="#booking" class="btn-navy">Get a Free Estimate</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <div>
-      <h3>Malden Junk Removal</h3>
-      <p>We make junk disappear.</p>
+    <div class="footer-top">
+      <div>
+        <h3>Malden <span>Junk</span> Removal</h3>
+        <p class="tagline">We make junk disappear — fast, affordable, and hassle-free. Serving Greater Boston.</p>
+        <div class="footer-phone">617-000-0000</div>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Home Junk Removal</a></li>
+          <li><a href="#services">Business Junk Removal</a></li>
+          <li><a href="#services">Furniture Removal</a></li>
+          <li><a href="#services">Garage Cleanouts</a></li>
+          <li><a href="#services">Estate Cleanouts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Service Areas</h4>
+        <ul>
+          <li>Malden</li>
+          <li>Medford</li>
+          <li>Everett</li>
+          <li>Revere</li>
+          <li>Chelsea</li>
+          <li>Somerville</li>
+          <li>Cambridge</li>
+          <li>Boston & more</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
     </div>
-
-    <div>
-      <h4>Services</h4>
-      <p>Home Junk Removal</p>
-      <p>Business Junk Removal</p>
-      <p>Furniture Removal</p>
-    </div>
-
-    <div>
-      <h4>Company</h4>
-      <p>About Us</p>
-      <p>Reviews</p>
-      <p>Contact</p>
+    <div class="footer-bottom">
+      <p>© 2025 Malden Junk Removal. All rights reserved.</p>
+      <p>Licensed & Insured • Greater Boston Area</p>
     </div>
   </footer>
 
+  <!-- STICKY MOBILE CTA -->
+  <a href="#booking" class="sticky-cta">📅 Book a Free Pickup Today</a>
+
+  <!-- SLIDE-IN QUOTE POPUP -->
+  <div class="quote-popup" id="quotePopup">
+    <div class="qp-header">
+      <div class="qp-header-left">
+        <span class="qp-badge">Free Quote</span>
+        <h3>Get an instant estimate</h3>
+      </div>
+      <button class="qp-close" onclick="dismissPopup()">✕</button>
+    </div>
+    <div class="qp-body">
+      <p>Takes 30 seconds — no credit card, no commitment.</p>
+      <div class="qp-form" id="qpForm">
+        <label>Your Phone</label>
+        <input type="tel" placeholder="617-000-0000" id="qpPhone" />
+        <label>What needs to go?</label>
+        <select id="qpItem">
+          <option value="">Select type…</option>
+          <option>Furniture</option>
+          <option>Mattress / Box Spring</option>
+          <option>Appliances</option>
+          <option>Electronics / TV</option>
+          <option>Garage Cleanout</option>
+          <option>Mixed Junk</option>
+          <option>Other</option>
+        </select>
+        <button onclick="submitPopup()">Get My Free Quote →</button>
+      </div>
+      <div class="qp-success" id="qpSuccess">
+        <div class="success-icon">🎉</div>
+        <h4>We'll call you shortly!</h4>
+        <p>Thanks — a team member will reach out within minutes to confirm your free estimate.</p>
+      </div>
+      <p class="qp-note">No spam. We only call to confirm your pickup.</p>
+    </div>
+  </div>
+
+  <script>
+    // Show popup after 3 seconds
+    setTimeout(function () {
+      document.getElementById('quotePopup').classList.add('open');
+    }, 3000);
+
+    function dismissPopup() {
+      var p = document.getElementById('quotePopup');
+      p.classList.remove('open');
+      p.classList.add('dismissed');
+    }
+
+    function submitPopup() {
+      var phone = document.getElementById('qpPhone').value.trim();
+      var item  = document.getElementById('qpItem').value;
+      if (!phone) {
+        document.getElementById('qpPhone').focus();
+        document.getElementById('qpPhone').style.borderColor = '#ef4444';
+        return;
+      }
+      document.getElementById('qpForm').style.display = 'none';
+      document.getElementById('qpSuccess').style.display = 'block';
+      // Auto-dismiss after 4 seconds
+      setTimeout(dismissPopup, 4000);
+    }
+
+    // Booking card submit
+    function handleBooking(btn) {
+      btn.textContent = '✓ Request Received!';
+      btn.style.background = '#22c55e';
+      btn.style.color = '#fff';
+      btn.disabled = true;
+    }
+  </script>
 </body>
 </html>
