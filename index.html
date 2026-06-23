@@ -705,59 +705,116 @@
     }
     .footer-bottom p { font-size: 12px; color: #475569; }
 
-    /* ─── SLIDE-IN QUOTE POPUP ────────────────────────────── */
+    /* ─── QUOTE MODAL OVERLAY ─────────────────────────────── */
+    .qp-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 18, 32, 0.72);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 9998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease;
+    }
+    .qp-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
     .quote-popup {
       position: fixed;
-      bottom: 32px;
-      right: -440px;
-      width: 400px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -40%) scale(0.94);
+      width: 520px;
+      max-width: calc(100vw - 32px);
+      max-height: 90vh;
+      overflow-y: auto;
       background: var(--white);
-      border-radius: 20px;
-      box-shadow: 0 24px 64px rgba(0,0,0,.22), 0 0 0 1px rgba(0,0,0,.06);
+      border-radius: 24px;
+      box-shadow: 0 32px 80px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.06);
       z-index: 9999;
-      transition: right .55s cubic-bezier(.34,1.3,.64,1);
-      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .45s cubic-bezier(.34,1.28,.64,1), opacity .35s ease;
     }
-    .quote-popup.open { right: 32px; }
+    .quote-popup.open {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      pointer-events: all;
+    }
     .quote-popup.dismissed {
-      right: -440px;
-      transition: right .4s ease-in;
+      transform: translate(-50%, -44%) scale(0.92);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .3s ease-in, opacity .25s ease-in;
     }
 
     .qp-header {
       background: var(--navy);
-      padding: 18px 20px;
+      padding: 22px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-radius: 24px 24px 0 0;
     }
-    .qp-header-left { display: flex; align-items: center; gap: 10px; }
+    .qp-header-left { display: flex; align-items: center; gap: 12px; }
     .qp-badge {
       background: var(--accent);
       color: var(--navy);
       font-size: 11px;
       font-weight: 800;
-      letter-spacing: .06em;
+      letter-spacing: .07em;
       text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 20px;
     }
-    .qp-header h3 { color: var(--white); font-size: 15px; font-weight: 700; }
+    .qp-header h3 { color: var(--white); font-size: 17px; font-weight: 700; }
     .qp-close {
-      background: none;
+      background: rgba(255,255,255,.1);
       border: none;
-      color: #64748b;
-      font-size: 20px;
+      color: #94a3b8;
+      font-size: 18px;
       cursor: pointer;
-      line-height: 1;
-      padding: 2px;
-      transition: color .2s;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, color .2s;
+      flex-shrink: 0;
     }
-    .qp-close:hover { color: var(--white); }
+    .qp-close:hover { background: rgba(255,255,255,.18); color: var(--white); }
 
-    .qp-body { padding: 20px; }
-    .qp-body p { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+    .qp-body { padding: 28px 28px 24px; }
+    .qp-intro {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #f0fdf4;
+      border: 1.5px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 22px;
+    }
+    .qp-intro-icon { font-size: 26px; flex-shrink: 0; }
+    .qp-intro p {
+      font-size: 13px;
+      color: #166534;
+      margin: 0;
+      line-height: 1.5;
+      font-weight: 500;
+    }
 
+    .qp-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .qp-field { margin-bottom: 14px; }
+    .qp-field.full { grid-column: span 2; }
     .qp-form label {
       display: block;
       font-size: 11px;
@@ -765,51 +822,62 @@
       text-transform: uppercase;
       letter-spacing: .06em;
       color: var(--muted);
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
     .qp-form input,
-    .qp-form select {
+    .qp-form select,
+    .qp-form textarea {
       width: 100%;
       border: 1.5px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 12px;
+      border-radius: 10px;
+      padding: 11px 14px;
       font-size: 14px;
       font-family: inherit;
       color: var(--text);
+      background: var(--white);
       outline: none;
-      margin-bottom: 12px;
-      transition: border-color .2s;
+      transition: border-color .2s, box-shadow .2s;
     }
     .qp-form input:focus,
-    .qp-form select:focus { border-color: var(--accent); }
-    .qp-form button {
+    .qp-form select:focus,
+    .qp-form textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(245,197,24,.18);
+    }
+    .qp-form textarea { resize: none; height: 72px; }
+    .qp-form .submit-btn {
       width: 100%;
       background: var(--accent);
       color: var(--navy);
       font-weight: 800;
-      font-size: 14px;
-      padding: 12px;
+      font-size: 16px;
+      padding: 15px;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: background .2s;
+      transition: background .2s, transform .15s;
+      margin-top: 6px;
     }
-    .qp-form button:hover { background: var(--accent2); }
+    .qp-form .submit-btn:hover { background: var(--accent2); transform: translateY(-1px); }
     .qp-note {
       text-align: center;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
-      margin-top: 10px;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
     }
 
     .qp-success {
       display: none;
       text-align: center;
-      padding: 8px 0 4px;
+      padding: 20px 0 8px;
     }
-    .qp-success .success-icon { font-size: 40px; margin-bottom: 8px; }
-    .qp-success h4 { font-size: 17px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
-    .qp-success p { font-size: 13px; color: var(--muted); }
+    .qp-success .success-icon { font-size: 52px; margin-bottom: 12px; }
+    .qp-success h4 { font-size: 22px; font-weight: 900; color: var(--navy); margin-bottom: 8px; letter-spacing: -.02em; }
+    .qp-success p { font-size: 15px; color: var(--muted); line-height: 1.6; margin: 0; }
 
     /* ─── STICKY BOTTOM CTA (mobile) ─────────────────────── */
     .sticky-cta {
@@ -827,24 +895,328 @@
       box-shadow: 0 -4px 20px rgba(0,0,0,.15);
     }
 
-    /* ─── RESPONSIVE ──────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .hero { flex-direction: column; padding: 40px 20px; min-height: auto; }
-      .booking-card { width: 100%; }
-      .take-cols { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      nav { display: none; }
-      .quote-popup { width: calc(100vw - 24px); bottom: 16px; right: -100vw; }
-      .quote-popup.open { right: 12px; }
-      .sticky-cta { display: block; }
+    /* ─── HAMBURGER MENU ──────────────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 200;
     }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform .3s, opacity .2s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 150;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 22px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 12px;
+      transition: background .2s, color .2s;
+      width: 260px;
+      text-align: center;
+    }
+    .mobile-nav a:hover { background: rgba(255,255,255,.08); }
+    .mobile-nav .mobile-cta {
+      background: var(--accent);
+      color: var(--navy) !important;
+      margin-top: 10px;
+    }
+    .mobile-nav-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,.1);
+      border: none;
+      color: var(--white);
+      font-size: 22px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+
+    /* Tablet & below */
+    @media (max-width: 900px) {
+      /* Top bar */
+      .top-bar { padding: 8px 16px; font-size: 12px; }
+
+      /* Navbar */
+      .navbar { padding: 0 16px; }
+      nav { display: none; }
+      .hamburger { display: flex; }
+
+      /* Hero */
+      .hero { flex-direction: column; padding: 36px 20px 40px; min-height: auto; gap: 32px; }
+      .hero-content { max-width: 100%; }
+      .hero-buttons { flex-direction: column; }
+      .hero-buttons a { text-align: center; }
+      .booking-card { width: 100%; }
+
+      /* Stats */
+      .stats-bar { padding: 18px 16px; gap: 20px; }
+      .stat-num { font-size: 22px; }
+
+      /* How it works */
+      .how-with-photo { grid-template-columns: 1fr; padding: 48px 20px; gap: 32px; }
+      .how-photo-wrap { order: -1; }
+      .how-photo-wrap img { height: 220px; }
+
+      /* Photo strip */
+      .photo-strip { grid-template-columns: repeat(2, 1fr); height: 240px; }
+      .photo-strip-item:nth-child(n+3) { display: none; }
+
+      /* Services grid */
+      .services-section { padding: 48px 20px; }
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
+
+      /* What we take */
+      .take-section { padding: 48px 20px; }
+      .take-cols { grid-template-columns: 1fr; gap: 28px; }
+
+      /* Pricing */
+      .pricing-section { padding: 48px 20px; }
+      .pricing-cards { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+
+      /* Gallery */
+      .gallery-section { padding: 40px 16px; }
+      .photo-gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 160px 160px 160px; gap: 8px; }
+      .photo-gallery .gal-item.tall { grid-row: span 1; }
+      .photo-gallery .gal-item:nth-child(5) { display: none; }
+
+      /* Reviews */
+      .reviews-section { padding: 48px 20px; }
+      .review-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+      /* Footer */
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
+      footer { padding: 40px 20px 80px; }
+
+      /* Sticky CTA */
+      .sticky-cta { display: block; }
+
+      /* Sections general */
+      .how { padding: 48px 20px; }
+      .section-title { font-size: 26px; }
+      .cta-strip { padding: 40px 20px; }
+      .sustain-section { padding: 48px 20px; }
+      .sustain-icons { gap: 28px; }
+    }
+
+    /* Mobile phones */
     @media (max-width: 480px) {
-      .footer-top { grid-template-columns: 1fr; }
-      .stats-bar { gap: 28px; }
+      /* Top bar — just phone number, hide button */
+      .top-bar { justify-content: center; }
+      .top-bar a { display: none; }
+
+      /* Navbar */
+      .navbar { height: 56px; }
+      .logo { font-size: 17px; }
+
+      /* Hero text */
+      .hero { padding: 28px 16px 36px; }
+      .mini-tag { font-size: 11px; }
+      .hero-p { font-size: 15px; }
+      .trust-badges { flex-direction: column; gap: 10px; }
+
+      /* Booking card */
+      .booking-card { padding: 24px 18px; }
+      .booking-card h2 { font-size: 18px; }
+
+      /* Stats bar */
+      .stats-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px 16px; }
+      .stat-num { font-size: 24px; }
+
+      /* Photo strip */
+      .photo-strip { grid-template-columns: 1fr; height: 200px; }
+      .photo-strip-item:nth-child(n+2) { display: none; }
+
+      /* Services */
+      .services-section { padding: 40px 16px; }
+      .service-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .service-card { padding: 18px 12px; font-size: 12px; }
+      .service-card .svc-icon { font-size: 22px; }
+
+      /* What we take */
+      .take-section { padding: 40px 16px; }
+      .take-list li { font-size: 13px; }
+
+      /* Pricing */
+      .pricing-section { padding: 40px 16px; }
+      .pricing-cards { max-width: 100%; }
+
+      /* Gallery */
+      .photo-gallery { grid-template-columns: 1fr; grid-template-rows: repeat(3, 180px); }
+      .photo-gallery .gal-item:nth-child(n+4) { display: none; }
+
+      /* Reviews */
+      .reviews-section { padding: 40px 16px; }
+
+      /* How it works */
+      .how-with-photo { padding: 40px 16px; }
+      .step h3 { font-size: 15px; }
+
+      /* Sustainability */
+      .sustain-section { padding: 40px 16px; }
+      .sustain-icons { flex-direction: column; gap: 20px; align-items: center; }
+
+      /* CTA strip */
+      .cta-strip { padding: 36px 16px; }
+      .cta-phone { font-size: 22px; }
+      .cta-strip-btns { flex-direction: column; align-items: center; }
+      .cta-strip-btns a { width: 100%; text-align: center; }
+
+      /* Footer */
+      .footer-top { grid-template-columns: 1fr; gap: 24px; }
+      footer { padding: 36px 16px 80px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 6px; }
+
+      /* Modal popup */
+      .quote-popup { max-height: 85vh; }
+      .qp-row { grid-template-columns: 1fr; }
+      .qp-field.full { grid-column: span 1; }
+      .qp-body { padding: 20px 18px 18px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .quote-popup { transition: none; }
+      .quote-popup, .mobile-nav { transition: none; }
+    }
+
+    /* ─── PHOTO SECTIONS ──────────────────────────────────── */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: 220px;
+      overflow: hidden;
+    }
+    .photo-strip-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .photo-strip-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+      display: block;
+    }
+    .photo-strip-item:hover img { transform: scale(1.07); }
+    .photo-strip-item .strip-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(15,27,45,.85));
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 20px 12px 10px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    /* How it works with side photo */
+    .how-with-photo {
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      gap: 56px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 32px;
+    }
+    .how-photo-wrap {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 56px rgba(0,0,0,.14);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .how-photo-wrap img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+    }
+    .how-photo-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: var(--accent);
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 8px 16px;
+      border-radius: 20px;
+    }
+
+    /* Gallery above reviews */
+    .gallery-section {
+      background: var(--navy);
+      padding: 56px 32px;
+    }
+    .gallery-inner { max-width: 1100px; margin: 0 auto; }
+    .gallery-inner .section-eyebrow { color: var(--accent); opacity: .8; }
+    .gallery-inner .section-title { color: var(--white); margin-bottom: 32px; }
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 220px 220px;
+      gap: 12px;
+    }
+    .photo-gallery .gal-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .photo-gallery .gal-item.tall {
+      grid-row: span 2;
+    }
+    .photo-gallery .gal-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .photo-gallery .gal-item:hover img { transform: scale(1.05); }
+
+    @media (max-width: 900px) {
+      .photo-strip { grid-template-columns: repeat(2, 1fr); height: 300px; }
+      .photo-strip-item:nth-child(n+3) { display: none; }
+      .how-with-photo { grid-template-columns: 1fr; }
+      .how-photo-wrap { order: -1; }
+      .how-photo-wrap img { height: 260px; }
+      .photo-gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 180px 180px 180px; }
+      .photo-gallery .gal-item.tall { grid-row: span 1; }
+      .photo-gallery .gal-item:last-child { display: none; }
     }
   </style>
 </head>
@@ -867,8 +1239,21 @@
       <a href="#reviews">Reviews</a>
       <a href="#contact" class="nav-cta">Get a Quote</a>
     </nav>
-    <div></div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
+
+  <!-- MOBILE NAV OVERLAY -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="toggleMenu()">✕</button>
+    <a href="#home"        onclick="toggleMenu()">Home</a>
+    <a href="#services"    onclick="toggleMenu()">Services</a>
+    <a href="#pricing"     onclick="toggleMenu()">Pricing</a>
+    <a href="#what-we-take" onclick="toggleMenu()">What We Take</a>
+    <a href="#reviews"     onclick="toggleMenu()">Reviews</a>
+    <a href="#contact"     onclick="toggleMenu()" class="mobile-cta">Get a Free Quote</a>
+  </div>
 
   <!-- HERO -->
   <section class="hero" id="home">
@@ -945,31 +1330,63 @@
     </div>
   </div>
 
+  <!-- PHOTO STRIP -->
+  <div class="photo-strip">
+    <div class="photo-strip-item">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Junk removal truck loading" loading="lazy" />
+      <div class="strip-label">Full Truckloads</div>
+    </div>
+    <div class="photo-strip-item">
+      <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80" alt="Garage cleanout service" loading="lazy" />
+      <div class="strip-label">Garage Cleanouts</div>
+    </div>
+    <div class="photo-strip-item">
+      <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80" alt="Furniture removal" loading="lazy" />
+      <div class="strip-label">Furniture Removal</div>
+    </div>
+    <div class="photo-strip-item">
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Professional crew at work" loading="lazy" />
+      <div class="strip-label">Professional Crew</div>
+    </div>
+  </div>
+
   <!-- HOW IT WORKS -->
-  <section class="how" id="services">
-    <div class="section-eyebrow">How It Works</div>
-    <h2 class="section-title">Junk Gone in 3 Simple Steps</h2>
-    <p class="section-sub">No surprises, no hidden fees. We show up, you approve the price, we haul everything away.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-icon">📞</div>
-        <h3>1. Book Online or Call</h3>
-        <p>Fill out the form or call us. We'll confirm your time window — often same day.</p>
-      </div>
-      <div class="step-connector">→</div>
-      <div class="step">
-        <div class="step-icon">💰</div>
-        <h3>2. Get Your Free Quote</h3>
-        <p>We give you an upfront price before we start. No surprises, no pressure.</p>
-      </div>
-      <div class="step-connector">→</div>
-      <div class="step">
-        <div class="step-icon">🚛</div>
-        <h3>3. We Haul & Clean Up</h3>
-        <p>Our crew loads everything up and sweeps the area. You're done.</p>
+  <section id="services">
+  <div class="how-with-photo">
+    <div class="how-text">
+      <div class="section-eyebrow">How It Works</div>
+      <h2 class="section-title">Junk Gone in 3 Simple Steps</h2>
+      <p class="section-sub" style="margin:0 0 40px;text-align:left;">No surprises, no hidden fees. We show up, you approve the price, we haul everything away.</p>
+      <div class="steps" style="flex-direction:column;align-items:flex-start;gap:24px;">
+        <div class="step" style="max-width:100%;text-align:left;display:flex;gap:16px;align-items:flex-start;">
+          <div class="step-icon" style="flex-shrink:0;">📞</div>
+          <div>
+            <h3>1. Book Online or Call</h3>
+            <p>Fill out the form or call us. We'll confirm your time window — often same day.</p>
+          </div>
+        </div>
+        <div class="step" style="max-width:100%;text-align:left;display:flex;gap:16px;align-items:flex-start;">
+          <div class="step-icon" style="flex-shrink:0;">💰</div>
+          <div>
+            <h3>2. Get Your Free Quote</h3>
+            <p>We give you an upfront price before we start. No surprises, no pressure.</p>
+          </div>
+        </div>
+        <div class="step" style="max-width:100%;text-align:left;display:flex;gap:16px;align-items:flex-start;">
+          <div class="step-icon" style="flex-shrink:0;">🚛</div>
+          <div>
+            <h3>3. We Haul & Clean Up</h3>
+            <p>Our crew loads everything up and sweeps the area. You're done.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+    <div class="how-photo-wrap">
+      <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=700&q=80" alt="Junk removal team at work" loading="lazy" />
+      <div class="how-photo-badge">⚡ Same-Day Service Available</div>
+    </div>
+  </div>
+</section>
 
   <!-- SERVICES -->
   <section class="services-section" id="what-we-take">
@@ -1076,6 +1493,33 @@
       </div>
     </div>
     <p style="text-align:center;margin-top:28px;font-size:14px;color:var(--muted);">Prices may vary based on item type, weight, and disposal fees. We always confirm before we start.</p>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section class="gallery-section">
+    <div class="gallery-inner">
+      <div style="text-align:center;margin-bottom:32px;">
+        <div class="section-eyebrow">Our Work</div>
+        <h2 class="section-title">Before We Leave, It's Clean</h2>
+      </div>
+      <div class="photo-gallery">
+        <div class="gal-item tall">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Full truck junk removal" loading="lazy" />
+        </div>
+        <div class="gal-item">
+          <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80" alt="Garage cleanout" loading="lazy" />
+        </div>
+        <div class="gal-item">
+          <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80" alt="Furniture being removed" loading="lazy" />
+        </div>
+        <div class="gal-item">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Professional workers" loading="lazy" />
+        </div>
+        <div class="gal-item">
+          <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=600&q=80" alt="Clean workspace after removal" loading="lazy" />
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- REVIEWS -->
@@ -1192,66 +1636,108 @@
   <!-- STICKY MOBILE CTA -->
   <a href="#booking" class="sticky-cta">📅 Book a Free Pickup Today</a>
 
-  <!-- SLIDE-IN QUOTE POPUP -->
+  <!-- QUOTE MODAL OVERLAY -->
+  <div class="qp-overlay" id="qpOverlay" onclick="dismissPopup()"></div>
+
+  <!-- QUOTE MODAL -->
   <div class="quote-popup" id="quotePopup">
     <div class="qp-header">
       <div class="qp-header-left">
-        <span class="qp-badge">Free Quote</span>
-        <h3>Get an instant estimate</h3>
+        <span class="qp-badge">100% Free</span>
+        <h3>Get Your Free Quote</h3>
       </div>
       <button class="qp-close" onclick="dismissPopup()">✕</button>
     </div>
     <div class="qp-body">
-      <p>Takes 30 seconds — no credit card, no commitment.</p>
+      <div class="qp-intro">
+        <span class="qp-intro-icon">⚡</span>
+        <p>Takes 30 seconds. We'll call you back fast with a firm price — no credit card, no commitment.</p>
+      </div>
       <div class="qp-form" id="qpForm">
-        <label>Your Phone</label>
-        <input type="tel" placeholder="617-000-0000" id="qpPhone" />
-        <label>What needs to go?</label>
-        <select id="qpItem">
-          <option value="">Select type…</option>
-          <option>Furniture</option>
-          <option>Mattress / Box Spring</option>
-          <option>Appliances</option>
-          <option>Electronics / TV</option>
-          <option>Garage Cleanout</option>
-          <option>Mixed Junk</option>
-          <option>Other</option>
-        </select>
-        <button onclick="submitPopup()">Get My Free Quote →</button>
+        <div class="qp-row">
+          <div class="qp-field">
+            <label>First Name</label>
+            <input type="text" placeholder="John" />
+          </div>
+          <div class="qp-field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith" />
+          </div>
+        </div>
+        <div class="qp-row">
+          <div class="qp-field">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="617-000-0000" id="qpPhone" />
+          </div>
+          <div class="qp-field">
+            <label>Preferred Date</label>
+            <input type="date" />
+          </div>
+        </div>
+        <div class="qp-field">
+          <label>What needs to go?</label>
+          <select id="qpItem">
+            <option value="">Select type…</option>
+            <option>Furniture (sofa, chairs, dresser)</option>
+            <option>Mattress / Box Spring</option>
+            <option>Appliances</option>
+            <option>Electronics / TV</option>
+            <option>Garage Cleanout</option>
+            <option>Yard Waste</option>
+            <option>Construction Debris</option>
+            <option>Mixed Junk / Full Cleanout</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="qp-field">
+          <label>Any details? (optional)</label>
+          <textarea placeholder="How much junk? Any stairs or tight access?"></textarea>
+        </div>
+        <button class="submit-btn" onclick="submitPopup()">Get My Free Quote →</button>
       </div>
       <div class="qp-success" id="qpSuccess">
         <div class="success-icon">🎉</div>
-        <h4>We'll call you shortly!</h4>
-        <p>Thanks — a team member will reach out within minutes to confirm your free estimate.</p>
+        <h4>You're all set!</h4>
+        <p>A team member will call you shortly to confirm your free estimate. We look forward to helping you out.</p>
       </div>
-      <p class="qp-note">No spam. We only call to confirm your pickup.</p>
+      <p class="qp-note">🔒 No spam. We only call to confirm your pickup.</p>
     </div>
   </div>
 
   <script>
-    // Show popup after 3 seconds
+    // Hamburger menu
+    function toggleMenu() {
+      document.getElementById('hamburger').classList.toggle('active');
+      document.getElementById('mobileNav').classList.toggle('open');
+      document.body.style.overflow = document.getElementById('mobileNav').classList.contains('open') ? 'hidden' : '';
+    }
+
+    // Show popup + overlay after 3 seconds
     setTimeout(function () {
       document.getElementById('quotePopup').classList.add('open');
+      document.getElementById('qpOverlay').classList.add('open');
     }, 3000);
 
     function dismissPopup() {
       var p = document.getElementById('quotePopup');
+      var o = document.getElementById('qpOverlay');
       p.classList.remove('open');
       p.classList.add('dismissed');
+      o.classList.remove('open');
     }
 
     function submitPopup() {
       var phone = document.getElementById('qpPhone').value.trim();
-      var item  = document.getElementById('qpItem').value;
       if (!phone) {
-        document.getElementById('qpPhone').focus();
-        document.getElementById('qpPhone').style.borderColor = '#ef4444';
+        var inp = document.getElementById('qpPhone');
+        inp.focus();
+        inp.style.borderColor = '#ef4444';
+        inp.style.boxShadow = '0 0 0 3px rgba(239,68,68,.18)';
         return;
       }
       document.getElementById('qpForm').style.display = 'none';
       document.getElementById('qpSuccess').style.display = 'block';
-      // Auto-dismiss after 4 seconds
-      setTimeout(dismissPopup, 4000);
+      setTimeout(dismissPopup, 4500);
     }
 
     // Booking card submit
